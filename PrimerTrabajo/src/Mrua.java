@@ -49,6 +49,19 @@ public class Mrua {
         System.out.println("Ecuacion Velocidad: " + getEcuacionVelocidad());
     }
 
+    
+    public String calcularTiempoPosicion(double posicion){
+        return particula.calcularTiempoPosicion(posicion);
+    }
+
+    public String calcularTiempoAceleracion(double aceleracion){
+        return particula.calcularTiempoAceleracion(aceleracion);
+    }
+
+    public String calcularTiempoVelocidad(double velocidad){
+        return particula.calcularTiempoVelocidad(velocidad);
+    }
+
     public static void main(String[] args) {
         Mrua mrua = new Mrua(3, 2, 2);
         mrua.imprimirEcuaciones();

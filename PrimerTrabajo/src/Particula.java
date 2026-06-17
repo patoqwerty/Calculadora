@@ -30,15 +30,11 @@ public class Particula{
     }
 
     public void calcularEcuacionVelocidad(){
-        ecuacionVelocidad = util.eval(
-            "D("+ ecuacionPosicion + ", t)"
-        ).toString();
+        ecuacionVelocidad = util.eval("D("+ ecuacionPosicion + ", t)" ).toString();
     }
 
     public void calcularEcuacionAceleracion(){
-        ecuacionAceleracion = util.eval(
-            "D("+ ecuacionVelocidad + ", t)"
-        ).toString();
+        ecuacionAceleracion = util.eval( "D("+ ecuacionVelocidad + ", t)" ).toString();
     }
 
     public void calcularPosicion(double tiempo){
@@ -52,6 +48,20 @@ public class Particula{
     public void calcularAceleracion(double tiempo){
         aceleracion = util.eval (ecuacionAceleracion.replace("t", "("+ tiempo + ")")).toDoubleDefault(Double.NaN);
     }
+
+    public String calcularTiempoPosicion(double posicion){
+        return util.eval ("Solve(" + ecuacionPosicion + "==" + posicion + ", t)" ).toString();
+    
+    }
+
+    public String calcularTiempoVelocidad(double velocidad){
+        return util.eval ("Solve(" + ecuacionVelocidad + "==" + velocidad + ", t)" ).toString();
+    }
+
+    public String calcularTiempoAceleracion (double aceleracion){
+        return util.eval ("Solve(" + ecuacionAceleracion + "==" + aceleracion + ", t)" ).toString();
+    }
+
 
     public double getPosicion() {
         return posicion;
@@ -84,5 +94,10 @@ public class Particula{
     public static void main(String[] args) {
         Particula particula1 = new Particula("t^2 + 3*t - 1",0);
         particula1.cambiarTiempo(2);
+        System.out.println("El tiempo en la posicion 0 es: " + particula1.calcularTiempoPosicion(0));
+
+        System.out.println("\nEcuacion de la velocidad : " + particula1.ecuacionVelocidad);
+        
+        System.out.println("El tiempo cuando la velocidad es 0 :" + particula1.calcularTiempoVelocidad(0));
     }
 }

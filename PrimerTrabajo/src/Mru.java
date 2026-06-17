@@ -31,6 +31,8 @@ public class Mru {
         return particula.getPosicion();
     }
 
+
+
     public static void main(String[] args) {
         Mru mru = new Mru(2, 3);
         System.out.println(mru.getEcuacionPosicion());

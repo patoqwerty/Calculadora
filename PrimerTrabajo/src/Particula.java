@@ -50,7 +50,7 @@ public class Particula{
     }
 
     public void calcularAceleracion(double tiempo){
-        posicion = util.eval (ecuacionAceleracion.replace("t", "("+ tiempo + ")")).toDoubleDefault(Double.NaN);
+        aceleracion = util.eval (ecuacionAceleracion.replace("t", "("+ tiempo + ")")).toDoubleDefault(Double.NaN);
     }
 
     public double getPosicion() {

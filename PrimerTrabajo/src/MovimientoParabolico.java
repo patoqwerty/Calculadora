@@ -30,6 +30,6 @@ public class MovimientoParabolico {
         MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0, 0);
         mov.evaluarTiempo(2);
         System.out.println("Distancia en el segundo 2 es: " + mov.getPosicion());
-        System.out.println("Altura en el segundo 2 es: " + mov.);
+        System.out.println("Altura en el segundo 2 es: " + mov.getAltura());
     }
 }

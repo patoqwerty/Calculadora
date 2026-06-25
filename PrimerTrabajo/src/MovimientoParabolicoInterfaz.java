@@ -24,7 +24,8 @@ public class MovimientoParabolicoInterfaz extends JFrame{
         String [] opciones = {
             "Altura Maxima",
             "Tiempo de Vuelo",
-            "Distancia Recorrida"};
+            "Distancia Recorrida",
+            "Calcular Todo"};
         JComboBox <String> comoOpciones = new JComboBox<>(opciones);
 
         JButton botonCalcular = new JButton("Calcular");
@@ -39,15 +40,31 @@ public class MovimientoParabolicoInterfaz extends JFrame{
             Vector velocidadInicial = new VectorPolar(magnitud, direccion);
             MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0,0);
 
+            int opcion = comoOpciones.getSelectedIndex();
+
+            if (opcion == 0) {
+                double resultado =mov.calcularAlturaMaxima();
+                etiquetaResultado.setText(resultado + "metros");
+            } else if (opcion == 1) {
+                double resultado =mov.calcularTiempoVuelo();
+                etiquetaResultado.setText(resultado + "segundos");
+            } else if (opcion == 2) {
+                double resultado =mov.calcularDistanciaTotal();
+                etiquetaResultado.setText(resultado + "metros");
+            } else if (opcion == 3) {
+                etiquetaResultado.setText("<html>Altura Maxima: " + mov.calcularAlturaMaxima() + " metros<br>Tiempo de Vuelo: " + mov.calcularTiempoVuelo() + " segundos<br>Distancia Recorrida: " + mov.calcularDistanciaTotal() + " metros</html>");
+            }
+
             //etiquetaResultado.setText((String)comoOpciones.getSelectedItem());
+
         });
 
         panel.add(etiquetaTitulo);//Agregar titulo al panel
         panel.add(etiquetaVelocidad);
         panel.add(etiquetaMagnitud);
+        panel.add(entradaMagnitud);
         panel.add(etiquetaDireccion);
         panel.add(entradaDireccion);
-        panel.add(entradaMagnitud);
         panel.add(comoOpciones);
         panel.add(botonCalcular);
         panel.add(etiquetaResultado);

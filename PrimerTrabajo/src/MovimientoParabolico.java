@@ -36,19 +36,39 @@ public class MovimientoParabolico {
     public Double calcularTiempoVelocidadVertical(double velocidad){
         String tiempo = movimientoVertical.calcularTiempoVelocidad(velocidad).replace("{{t->", "").replace("}}", "");
         return Double.parseDouble(tiempo);
+
+    }
+
+    public  Double calcularTiempoVuelo(){
+        String tiempo = calcularTiempoAltura(0);
+        int inicio = tiempo.lastIndexOf("t->") + 3;
+        int fin = tiempo.indexOf("}", inicio);
+        return Double.parseDouble(tiempo.substring(inicio, fin));
+
+       /*  String altura = calcularTiempoAltura(0).replace("{{t->0.0},{t->", "").replace("}}", "");
+        return Double.parseDouble(altura);*/
+    }
+
+    public double calcularDistanciaTotal(){
+        calcularTiempoVuelo();
+        movimientoHorizontal.evaluarTiempo(calcularTiempoVuelo());
+        return movimientoHorizontal.getPosicion();
+    }
+
+    public double calcularAlturaMaxima(){
+        movimientoVertical.evaluarTiempo(calcularTiempoVelocidadVertical(0));
+        return movimientoVertical.getPosicion();
+
     }
     
        public static void main(String[] args) {
-        Vector velocidadInicial = new VectorPolar(30, 70);
-        MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0, 0);
-        mov.evaluarTiempo(2);
-        System.out.println("Distancia en el segundo 2 es: " + mov.getPosicion());
-        System.out.println("Altura en el segundo 2 es: " + mov.getAltura());
+        Vector velocidadInicial = new VectorPolar(150, 0);
 
-        //System.out.println("El tiempo en el que el proyectil alcanza su altura maxima es : " + mov.calcularTiempoVelocidadVertical(0));
-
-        mov.evaluarTiempo(mov.calcularTiempoVelocidadVertical(0));
-        System.out.println("La altura maxima es : " + mov.getAltura());
+        MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0, 300);
+       
+        System.out.println("La altura maxima es : " + mov.calcularAlturaMaxima());
+        System.out.println("El tiempo de vuelo es: " + mov.calcularTiempoVuelo());
+        System.out.println("Distancia recorrida " + mov.calcularDistanciaTotal());
     }
 }
 

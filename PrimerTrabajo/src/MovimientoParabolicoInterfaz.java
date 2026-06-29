@@ -21,6 +21,9 @@ public class MovimientoParabolicoInterfaz extends JFrame{
         JLabel etiquetaDireccion = new JLabel("Direccion: ");
         JTextField entradaDireccion = new JTextField(20);
 
+        JLabel etiquetaAlturaInicial = new JLabel("Altura Inicial: ");
+        JTextField entradaAlturaInicial = new JTextField(20);
+
         String [] opciones = {
             "Altura Maxima",
             "Tiempo de Vuelo",
@@ -36,21 +39,22 @@ public class MovimientoParabolicoInterfaz extends JFrame{
         botonCalcular.addActionListener(e->{
             Double magnitud = Double.parseDouble(entradaMagnitud.getText());
             Double direccion = Double.parseDouble(entradaDireccion.getText());
+            Double alturaInicial = Double.parseDouble(entradaAlturaInicial.getText());
 
             Vector velocidadInicial = new VectorPolar(magnitud, direccion);
-            MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0,0);
+            MovimientoParabolico mov = new MovimientoParabolico(velocidadInicial, 0, alturaInicial);
 
             int opcion = comoOpciones.getSelectedIndex();
 
             if (opcion == 0) {
                 double resultado =mov.calcularAlturaMaxima();
-                etiquetaResultado.setText(resultado + "metros");
+                etiquetaResultado.setText(resultado + " metros");
             } else if (opcion == 1) {
                 double resultado =mov.calcularTiempoVuelo();
-                etiquetaResultado.setText(resultado + "segundos");
+                etiquetaResultado.setText(resultado + " segundos");
             } else if (opcion == 2) {
                 double resultado =mov.calcularDistanciaTotal();
-                etiquetaResultado.setText(resultado + "metros");
+                etiquetaResultado.setText(resultado + " metros");
             } else if (opcion == 3) {
                 etiquetaResultado.setText("<html>Altura Maxima: " + mov.calcularAlturaMaxima() + " metros<br>Tiempo de Vuelo: " + mov.calcularTiempoVuelo() + " segundos<br>Distancia Recorrida: " + mov.calcularDistanciaTotal() + " metros</html>");
             }
@@ -65,6 +69,8 @@ public class MovimientoParabolicoInterfaz extends JFrame{
         panel.add(entradaMagnitud);
         panel.add(etiquetaDireccion);
         panel.add(entradaDireccion);
+        panel.add(etiquetaAlturaInicial);
+        panel.add(entradaAlturaInicial);
         panel.add(comoOpciones);
         panel.add(botonCalcular);
         panel.add(etiquetaResultado);
